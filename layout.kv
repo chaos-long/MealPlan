@@ -1,0 +1,426 @@
+#:import Window kivy.core.window.Window
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+<My>:
+    id: scr
+    orientation: "vertical"
+    MDScreen:
+        md_bg_color: get_color_from_hex("#58D68D")
+        name: 'splash'
+        Image:
+            source: "icons_and_images/logo.png"
+            pos_hint: {"center_x":.5, "center_y":.5}
+    MDScreen:
+        name: 'main'
+        MDBottomNavigation:
+            id: bar100
+            panel_color: 1,1,1,1
+            text_color_active: get_color_from_hex("#14BA4C")
+            MDBottomNavigationItem:
+                name: "meal"
+                text: "Bữa ăn"
+                icon: "silverware-fork-knife"
+                MDFloatLayout:
+                    MDIconButton:
+                        icon: "settings-helper"
+                        pos_hint: {"top":1, "right":1}
+                        on_release:
+                            root.setting2()
+                    BoxLayout:
+                        orientation: "vertical"
+                        size_hint_y: .9
+                        pos_hint: {"top":.9}
+                        ScrollView:
+                            do_scroll_x: False
+                            bar_color: 1,1,1,1
+                            bar_inactive_color: 1,1,1,1
+                            BoxLayout:
+                                orientation: "vertical"
+                                size_hint_y: None
+                                height: self.minimum_height
+                                GridLayout:
+                                    id: ck
+                                    cols: 2
+                                    size_hint_y: None
+                                    height: self.minimum_height
+                MDFloatLayout:
+                    id: f1
+                    MDLabel:
+                        font_style: 'H5'
+                        color: get_color_from_hex("#000000")
+                        pos_hint: {"center_y": .625}
+                        text: "Kế hoạch ăn uống của bạn"
+                        halign: "center"
+                    MDLabel:
+                        font_style: 'H6'
+                        pos_hint: {"center_y": .525}
+                        color: get_color_from_hex("#ACACAC")
+                        text: "Lên kế hoạch bữa ăn của bạn cho cả tuần chỉ trong vài phút. Xây dựng bữa ăn của bạn để bắt đầu!"
+                        halign: "center"
+                    MDFlatButton:
+                        size_hint: .85,.07
+                        pos_hint: {"center_x":.5,"center_y":.375}
+                        text: "Xây dựng bữa ăn của bạn"
+                        theme_text_color: "Custom"
+                        text_color: 1,1,1,1
+                        md_bg_color: get_color_from_hex("#14BA4C")
+                        font_size: "18sp"
+                        on_release:
+                            app.root.current = 'build'
+                            app.root.transition.direction = 'up'
+
+
+
+            MDBottomNavigationItem:
+                name: "list"
+                text: "Giỏ hàng"
+                icon: "cart-variant"
+                MDIconButton:
+                    icon: "settings-helper"
+                    pos_hint: {"top":1, "right":1}
+                    on_release:
+                        root.setting()
+                MDLabel:
+                    text: "Giỏ hàng"
+                    font_style: 'H5'
+                    pos_hint: {"center_y":.85, "x":.05}
+                    color: get_color_from_hex("#000000")
+                MDBoxLayout:
+                    size_hint: 1,.7
+                    pos_hint: {"center_y":.45}
+                    MDScrollView:
+                        MDList:
+                            id:list
+
+            MDBottomNavigationItem:
+                name: "favourite"
+                text: "Yêu thích"
+                icon: "book-heart-outline"
+                MDLabel:
+                    text: "Yêu thích"
+                    font_style: 'H5'
+                    pos_hint: {"center_y":.85, "x":.05}
+                    color: get_color_from_hex("#000000")
+                MDBottomNavigationItem:
+                    name: "favourite"
+                    text: "Yêu thích"
+                    icon: "book-heart-outline"
+                    MDIconButton:
+                        icon: "settings-helper"
+                        pos_hint: {"top":1, "right":1}
+                        on_release:
+                            root.setting3()
+                    MDLabel:
+                        text: "Yêu thích"
+                        font_style: 'H5'
+                        pos_hint: {"center_y":.85, "x":.05}
+                        color: get_color_from_hex("#000000")
+                    BoxLayout:
+                        orientation: "vertical"
+                        size_hint_y: .8
+                        pos_hint: {"top":.8}
+                        ScrollView:
+                            do_scroll_x: False
+                            bar_color: 1,1,1,1
+                            bar_inactive_color: 1,1,1,1
+                            BoxLayout:
+                                orientation: "vertical"
+                                size_hint_y: None
+                                height: self.minimum_height
+                                GridLayout:
+                                    id: fav
+                                    cols: 2
+                                    size_hint_y: None
+                                    height: self.minimum_height
+    MDScreen:
+        name: 'build'
+        #MDFloatLayout:
+            #size_hint: .8,.09
+            #pos_hint: {"center_x":.55, "center_y":.94}
+            #md_bg_color: get_color_from_hex("#D0D3D4")
+            #radius: [10]
+            #TextInput:
+                #hint_text: "Tìm món ăn"
+                #pos_hint: {"center_x":.5, "center_y":.5}
+                #height: self.minimum_height
+                #cursor_color: rgba(253,174,177,255)
+                #cursor_width: "2sp"
+                #multiline: False
+                #background_color: 0,0,0,0
+                #foreground_color: get_color_from_hex("#1D8348")
+                #padding: 15
+                #hint_text_color: get_color_from_hex("#1D8348")
+        MDIconButton:
+            icon: "close"
+            pos_hint: {"left":1, "top":1}
+            on_release:
+                app.root.current = "main"
+                app.root.transition.direction = "down"
+        MDLabel:
+            color: get_color_from_hex("#000000")
+            text: "Phổ biến:"
+            font_style: 'H6'
+            pos_hint: {"x":0.02, "center_y":.87}
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: .4
+            pos_hint: {"top":.85}
+            ScrollView:
+                do_scroll_y: False
+                bar_color: 1,1,1,1
+                bar_inactive_color: 1,1,1,1
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint_x: None
+                    width: self.minimum_width
+                    GridLayout:
+                        id: meal
+                        rows: 1
+                        size_hint_x: None
+                        width: self.minimum_width
+        MDLabel:
+            text: "Mục khác:"
+            color: get_color_from_hex("#000000")
+            font_style: 'H6'
+            pos_hint: {"x":0.02, "center_y":.43}
+        Lab:
+            text: "Buổi sáng"
+            color: 1,1,1,1
+            size_hint: .385,.2
+            pos_hint: {"center_x":.2, "center_y":.31}
+            halign: "center"
+            canvas.before:
+                Color:
+                    rgb: 1,1,1,1
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [10]
+                    source: "icons_and_images/Classic Steak & Eggs Breakfast with Avocado and Tomato.png"
+            on_release:
+                app.root.current = "all"
+                app.root.transition.direction = "up"
+                root.viewbreakfast()
+        Lab:
+            size_hint: .385,.2
+            pos_hint: {"center_x":.8, "center_y":.31}
+            text: "Buổi trưa"
+            color: 1,1,1,1
+            halign: "center"
+            #font_name: "BPoppins"
+            canvas.before:
+                Color:
+                    rgb: 1,1,1,1
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [10]
+                    source: "icons_and_images/Hawaiian-Style Ham Sandwich with Pineapple, Avocado & Ranch Coleslaw.png"
+            on_release:
+                app.root.current = "all"
+                app.root.transition.direction = "up"
+                root.viewlunch()
+        Lab:
+            size_hint: .385,.2
+            pos_hint: {"center_x":.2, "center_y":.1}
+            text: "tráng miệng"
+            color: 1,1,1,1
+            halign: "center"
+            #font_name: "BPoppins"
+            canvas.before:
+                Color:
+                    rgb: 1,1,1,1
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [10]
+                    source: "icons_and_images/Open-Face Chicken & Mushroom Gravy Buns with Fresh Orange.png"
+            on_release:
+                app.root.current = "all"
+                app.root.transition.direction = "up"
+                root.viewdessert()
+        Lab:
+            size_hint: .385,.2
+            pos_hint: {"center_x":.8, "center_y":.1}
+            text: "Món chay"
+            color: 1,1,1,1
+            halign: "center"
+            #font_name: "BPoppins"
+            canvas.before:
+                Color:
+                    rgb: 1,1,1,1
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [10]
+                    source: "icons_and_images/Veggie Sausage with Herbed Polenta Fries & Tomato-Arugula Salad.png"
+            on_release:
+                app.root.current = "all"
+                app.root.transition.direction = "up"
+                root.viewveta()
+        BoxLayout:
+            pos_hint: {"center_x":.5, "center_y": .1}
+            size_hint: .00005,.7
+            canvas:
+                Color:
+                    rgba: .1, .1, 1, .9
+                Line:
+                    width: 2.
+                    rectangle: (self.x, self.y, self.width, self.height)
+
+
+
+    MDScreen:
+        id: all
+        name: "all"
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: .9
+            pos_hint: {"top":.9}
+            ScrollView:
+                do_scroll_x: False
+                bar_color: 1,1,1,1
+                bar_inactive_color: 1,1,1,1
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: self.minimum_height
+                    GridLayout:
+                        id: lis
+                        cols: 1
+                        size_hint_y: None
+                        height: self.minimum_height
+
+
+    MDScreen:
+        id: all2
+        name: 'scrn_plant'
+        MDIconButton:
+            pos_hint:{"top": 1}
+            icon: "close"
+            on_release:
+                root.what()
+        BoxLayout:
+            pos_hint: {"center_y":.8, "center_x":.5}
+            size_hint_y: .4
+            orientation: 'vertical'
+            Image:
+                id: ima
+            BoxLayout:
+                size_hint_y: .2
+                MDLabel:
+                    id: tex
+                    halign: 'center'
+
+        MDIconButton:
+            pos_hint: {"top":.56, "left":1}
+            icon: "cards-heart"
+            on_release:
+                root.addmeal2()
+
+        MDRectangleFlatButton:
+            pos_hint: {"center_x":.5, "top":.55}
+            text: "Thêm món ăn vào thực đơn"
+            line_color: "lightblue"
+            on_release:
+                root.addmeal()
+        MDTabs:
+            pos_hint: {"top": .47}
+            size_hint_y: .44
+            Tab:
+                title: "dụng cụ nấu ăn"
+                ScrollView:
+                    do_scroll_x: False
+                    bar_color: 1,1,1,1
+                    bar_inactive_color: 1,1,1,1
+                    MDList:
+                        id:tab1
+                        size_hint_y: None
+            Tab:
+                title: "nguyên liệu"
+                ScrollView:
+                    do_scroll_x: False
+                    bar_color: 1,1,1,1
+                    bar_inactive_color: 1,1,1,1
+                    MDList:
+                        id:tab2
+                        size_hint_y: None
+            Tab:
+                title: "nấu ăn & thưởng thức"
+                ScrollView:
+                    do_scroll_x: False
+                    bar_color: 1,1,1,1
+                    bar_inactive_color: 1,1,1,1
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        id:tab3
+                        size_hint_y: None
+                        height: self.minimum_height
+
+<Product>:
+    width: Window.width*.6
+    orientation: 'vertical'
+    size_hint_x: None
+    canvas.before:
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [root.radiuss]
+    Image:
+        source: root.source
+    BoxLayout:
+        size_hint_y: .34
+        MDLabel:
+            text: root.name
+            halign: 'center'
+<Product2>:
+    height: Window.height*.6
+    orientation: 'vertical'
+    size_hint_y: None
+    canvas.before:
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [root.radiuss]
+    Image:
+        source: root.source
+    BoxLayout:
+        size_hint_y: .34
+        MDLabel:
+            text: root.name
+            halign: 'center'
+<cook>:
+    height: Window.height*.4
+    orientation: 'vertical'
+    size_hint_y: None
+    canvas.before:
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [root.radiuss]
+    MDLabel:
+        text: root.name
+        halign: 'center'
+<normal>:
+    MDLabel:
+        font_style: 'H5'
+        color: get_color_from_hex("#000000")
+        pos_hint: {"center_y": .625}
+        text: "Kế hoạch ăn uống của bạn"
+        halign: "center"
+    MDLabel:
+        font_style: 'H6'
+        pos_hint: {"center_y": .525}
+        color: get_color_from_hex("#ACACAC")
+        text: "Lên kế hoạch bữa ăn của bạn cho cả tuần chỉ trong vài phút. Xây dựng bữa ăn của bạn để bắt đầu!"
+        halign: "center"
+    MDFlatButton:
+        size_hint: .85,.07
+        pos_hint: {"center_x":.5,"center_y":.375}
+        text: "Xây dựng bữa ăn của bạn"
+        theme_text_color: "Custom"
+        text_color: 1,1,1,1
+        md_bg_color: get_color_from_hex("#14BA4C")
+        font_size: "18sp"
+        on_release:
+            app.root.current = 'build'
+            app.root.transition.direction = 'up'
